@@ -4,6 +4,7 @@
 body{
     background-color: #121037;
 }
+/* home page */
 .inicio{
     font-size:30px;
     background-image: url(../assets/background.png);
@@ -19,7 +20,7 @@ body{
 header{
     font-size: 25px;
     height: 100px;
-    background-color: black;
+    background-color:#121037;
     color: white;
     display: flex;
     align-items: center;
@@ -40,13 +41,68 @@ header{
     width: 600px;
     text-align: center;
 }
-.frase button{
+button{
     margin: 50px;
     border-radius: 25px;
-    background-color: #AB0505;
     color:white;
     font-size: 25px;
     height: 60px;
     width: 300px;
     border:none;
 }
+
+.container-red{
+    color:white;
+    display: flex;
+    flex-direction: row;
+    background-color: #AB0505;
+    justify-content: space-around;
+    height: 500px;
+}
+
+.container-red button{
+    background-color: #121037;
+}
+
+.box{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container-blue{
+    color:white;
+    display: flex;
+    flex-direction: row;
+    background-color: #121037;
+    justify-content: space-around;
+    height: 500px;
+}
+
+.container-blue button{
+    background-color: #AB0505;
+}
+
+footer{
+    height: 100px;
+    background-color: #121037;
+    display: flex;
+    justify-content: space-around;
+    color:white;
+    flex-direction: row;
+    align-items: center;
+}
+footer img{
+    height: 50px;
+    width: 70px;
+}
+.indicie{
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*fim home page */
