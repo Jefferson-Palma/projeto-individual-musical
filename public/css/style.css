@@ -29,19 +29,25 @@ header{
 /* fim header */
 
 /* footer */
-
 footer{
-    font-size: 25px;
+    background-color: #121037;
     border-top:solid 5px yellow;
     height: 200px;
-    background-color: #121037;
+    display: flex;
+    color:white;
+    flex-direction: column;
+    text-align: center;
+}
+.footer{
+    margin-top: 20px;
+    font-size: 25px;
     display: flex;
     justify-content: space-around;
     color:white;
     flex-direction: row;
     align-items: center;
 }
-footer img{
+.footer img{
     height: 50px;
     width: 70px;
 }
@@ -143,7 +149,55 @@ a{
     width: 600px;
 }
 
-
-
-
 /*fim home page */
+
+/*inicio cadastroUsuario */
+.conteudo{
+    height: 800px;
+    background-image: url('../assets/IMG-6479.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formulario{
+    background-color: #AB0505;
+    height: 550px;
+    width: 500px;
+    border-radius: 15px;
+    margin: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.formulario input{
+    background-color:white;
+    border-radius: 10px;
+    width: 300px;
+    height: 35px;
+    border:none;
+
+}
+.formulario p{
+    color: white;
+    font-size: 25px;
+
+}
+.formulario button{
+    background-color: #121037;
+    color: white;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 20px;
+
+}
+
+.formulario h1{
+    color: white;
+    font-size: 40px;
+
+}
+/*fim cadastroUsuario */
