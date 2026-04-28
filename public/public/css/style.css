@@ -162,7 +162,7 @@ a{
 }
 .formulario{
     background-color: #AB0505;
-    height: 550px;
+    max-height: 550px;
     width: 500px;
     border-radius: 15px;
     margin: 30px;
@@ -171,6 +171,7 @@ a{
     justify-content: center;
     flex-direction: column;
     gap: 20px;
+    padding: 30px;
 }
 .formulario input{
     background-color:white;

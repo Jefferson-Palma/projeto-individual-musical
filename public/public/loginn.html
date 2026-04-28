@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./assets/logo.png">
+            <p>Visual music</p>
+        </div>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="">Famosos</a></p>
+        <p><a href="">Vida</a></p>
+        <img src="./assets/user.png" class="user">
+    </header>
+    <div class="conteudo">
+        <div class="formulario">
+            <h1>login</h1>
+            <div class="inputs">
+            <p>Email:</p>
+            <input type="text" id="id_email"><br>
+            </div>
+            <div class="inputs">
+            <p>Senha:</p>
+            <input type="password" id="id_senha"><br>
+            </div>
+            <button onclick="login()">Entrar</button>
+        </div>
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="logo">
+                <img src="./assets/logo.png">
+                <p>Visual music</p>
+            </div>
+            <div class="indicie">
+                <h3>Descubra</h3>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="">Famosos</a></p>
+                <p><a href="">Vida</a></p>
+            </div>
+        </div>
+
+        <div>
+            <h3>SPTech © 2026</h3>
+        </div>
+
+    </footer>
+</body>
+</html>
+<script>
+    function login(){
+        let email=id_email.value;
+        let senha=id_senha.value;
+        if(email==''){
+            alert('email inválido')
+        }
+        if(senha==''){
+            alert('senha inválida')
+        }
+
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+                alert('Login realizado com sucesso');
+                resposta.json().then(json => {
+                    
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    //sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+                alert('Email ou senha incorretos');
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+  }
+
+    
+</script>
