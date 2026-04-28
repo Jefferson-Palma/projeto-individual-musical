@@ -13,9 +13,9 @@
             <p>Visual music</p>
         </div>
         <p><a href="index.html">Home</a></p>
-        <p><a href="">Famosos</a></p>
-        <p><a href="">Vida</a></p>
-        <img src="./assets/user.png" class="user">
+        <p><a href="musical.html">Musical</a></p>
+        <p><a href="vida.html">Vida</a></p>
+        <a href="loginn.html"><img src="./assets/user.png" class="user"></a>
     </header>
     <div class="conteudo">
         <div class="formulario">
@@ -48,8 +48,8 @@
             <div class="indicie">
                 <h3>Descubra</h3>
                 <p><a href="index.html">Home</a></p>
-                <p><a href="">Famosos</a></p>
-                <p><a href="">Vida</a></p>
+                <p><a href="musical.html">Musical</a></p>
+                <p><a href="vida.html">Vida</a></p>
             </div>
         </div>
 
@@ -100,6 +100,8 @@
 
         if(invalido==0){
             alert('Cadastro realizado com sucesso!!');
+        }else{
+            return;
         }
 
         fetch("/usuarios/cadastrar", {
@@ -127,7 +129,7 @@
             "Cadastro realizado com sucesso! Redirecionando para tela de Login..."
 )
           setTimeout(() => {
-            window.location = "login.html";
+            window.location = "loginn.html";
           }, "2000");
 
           //limparFormulario();

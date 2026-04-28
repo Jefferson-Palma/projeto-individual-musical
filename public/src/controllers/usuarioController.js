@@ -19,7 +19,13 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        res.status(200).send("Sucesso");
+                        //res.status(200).send("Sucesso");
+                        res.json({
+                            id: resultadoAutenticar[0].id,
+                            email: resultadoAutenticar[0].email,
+                            nome: resultadoAutenticar[0].nome,
+                            senha: resultadoAutenticar[0].senha
+                        })
 //alert('sucesso');
                         // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
                         //     .then((resultadoAquarios) => {

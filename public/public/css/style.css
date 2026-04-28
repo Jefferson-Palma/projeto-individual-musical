@@ -103,8 +103,22 @@ a{
     flex-direction: row;
     background-color: #AB0505;
     justify-content: space-around;
-    height: 800px;
     align-items: center;
+}
+.padding-home{
+    padding: 150px;
+}
+
+.width-home{
+    width: 35%;
+}
+
+.padding-vida{
+    padding: 50px;
+}
+
+.width-vida{
+    width: 50%;
 }
 
 .container-red button{
@@ -112,13 +126,17 @@ a{
 }
 
 .box{
-    width: 35%;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    gap: 20px;
+}
+
+.box h2{
+    text-align:justify;
 }
 
 .box p{
@@ -136,7 +154,6 @@ a{
     flex-direction: row;
     background-color: #121037;
     justify-content: space-around;
-    height: 800px;
     align-items: center;
 }
 

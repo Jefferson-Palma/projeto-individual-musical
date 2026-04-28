@@ -13,9 +13,9 @@
             <p>Visual music</p>
         </div>
         <p><a href="index.html">Home</a></p>
-        <p><a href="">Famosos</a></p>
-        <p><a href="">Vida</a></p>
-        <img src="./assets/user.png" class="user">
+        <p><a href="musical.html">Musical</a></p>
+        <p><a href="vida.html">Vida</a></p>
+        <a href="loginn.html"><img src="./assets/user.png" class="user"></a>
     </header>
     <div class="conteudo">
         <div class="formulario">
@@ -29,6 +29,7 @@
             <input type="password" id="id_senha"><br>
             </div>
             <button onclick="login()">Entrar</button>
+            <p>Não possui uma conta? <a href="cadastroUsuario.html">Cadastre-se</a></p>
         </div>
     </div>
     <footer>
@@ -40,8 +41,8 @@
             <div class="indicie">
                 <h3>Descubra</h3>
                 <p><a href="index.html">Home</a></p>
-                <p><a href="">Famosos</a></p>
-                <p><a href="">Vida</a></p>
+                <p><a href="musical.html">Musical</a></p>
+                <p><a href="vida.html">Vida</a></p>
             </div>
         </div>
 
@@ -56,12 +57,7 @@
     function login(){
         let email=id_email.value;
         let senha=id_senha.value;
-        if(email==''){
-            alert('email inválido')
-        }
-        if(senha==''){
-            alert('senha inválida')
-        }
+
 
 
         fetch("/usuarios/autenticar", {
@@ -88,11 +84,12 @@
                     sessionStorage.ID_USUARIO = json.id;
                     //sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
+                    // apenas para exibir o loading
 
                 });
+                setTimeout(function () {
+                        window.location = "cadastro.html";
+                    }, 1000); 
 
             } else {
                 alert('Email ou senha incorretos');
