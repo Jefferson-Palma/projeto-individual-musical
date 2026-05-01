@@ -22,19 +22,22 @@
             <h1>Cadastre-se</h1>
             <div class="inputs">
             <p>Nome:</p>
-            <input type="text" id="id_nome"><br>
+            <input type="text" id="id_nome" placeholder="Insira seu nome"><br>
+            <div id="id_erro_nome" class="erro"></div>
             </div>
             <div class="inputs">
             <p>Email:</p>
-            <input type="text" id="id_email"><br>
+            <input type="text" id="id_email" placeholder="Insira seu email"><br>
+            <div id="id_erro_email" class="erro"></div>
             </div>
             <div class="inputs">
             <p>Senha:</p>
-            <input type="password" id="id_senha"><br>
+            <input type="password" id="id_senha" placeholder="Insira sua senha"><br>
             </div>
             <div class="inputs">
             <p>Confirmar senha:</p>
-            <input type="password" id="id_senhaConfirmacao"><br>
+            <input type="password" id="id_senhaConfirmacao" placeholder="Confirme sua senha"><br>
+            <div id="id_erro_senha" class="erro"></div>
             </div>
             <button onclick="cadastroUsuario()">Cadastrar</button>
         </div>
@@ -82,19 +85,19 @@
             nomeInvalido++
         }
         if(nomeInvalido>0){
-            alert('Nome inválido')
+            id_erro_nome.innerHTML=`Nome inválido`
             invalido++
         }
 
         //validação email
-        if(email==''|| !email.includes('@')|| !email.endsWith('.com')){
-            alert('Email inválido')
+        if(email==''|| !email.includes('@')|| !email.endsWith('.')){
+            id_erro_email.innerHTML=`Email inválido`
             invalido++
         }
 
         //validação senhas
         if(senha=='' || senhaConfirmacao==''||senha!=senhaConfirmacao){
-            alert('Senha inválida')
+            id_erro_senha.innerHTML=`Senha inválida`
             invalido++
         }
 

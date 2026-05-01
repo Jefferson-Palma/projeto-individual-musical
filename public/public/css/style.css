@@ -219,3 +219,109 @@ a{
 
 }
 /*fim cadastroUsuario */
+.erro{
+    color:red;
+    background-color: white;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 150px;
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+}
+.sidebar{
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 25%;
+    position: fixed;
+    background-color:#121037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+}
+
+.conteudoFamosos{
+    background-color: #AB0505;
+    margin-left: 25%;
+    width: 75%;
+    height: 100%;
+    color:white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap:50px;
+    padding-bottom: 30px;
+}
+
+.rotas{
+    color: white;
+    gap:70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rotas .logo{
+    font-size: 25px;
+}
+
+.rotas .logo img{
+    width: 120px;
+    height: 80px;
+}
+
+.buttons{
+    gap:30px;
+    display: flex;
+    flex-direction: column;
+}
+.buttons button{
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    background-color: #AB0505;
+    border-radius: 10px;
+}
+
+
+
+.titulos{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:30px;
+    flex-direction: column;
+}
+
+.boxes{
+    display: flex;
+    justify-content: space-around;
+}
+
+.musicais{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.musicais img{
+    border-radius: 15px;
+    width: 300px;
+    height: 200px;
+}
+
+.forms{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.linha{
+    display:flex;
+}
