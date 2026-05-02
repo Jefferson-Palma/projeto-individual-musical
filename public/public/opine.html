@@ -16,7 +16,7 @@
                 <img src="./assets/logo.png">
                 <p>Visual music</p>
             </div>
-            <h2>Bem vindo, <span>nome</span>!!</h2>
+            <h2>Bem vindo, <span id="nomeUser">nome</span>!!</h2>
             <div class="buttons">
                 <button>Dashboard</button>
                 <a href="famosos.html"><button>Musicais</button></a>
@@ -27,21 +27,41 @@
     </div>
     <div class="conteudoFamosos">
         <div class="titulos">
-        <h1>Nos de sua opinião</h1>
+            <h1>Nos de sua opinião</h1>
         </div>
         <div class="forms">
-        <div class="linha">
-        <p>Qual musical você mais gostou?:</p>
-        <select name="">
-            <option value="">a</option>
-            <option value="">b</option>
-            <option value="">c</option>
-        </select>
+            <div class="linha">
+                <p>Qual tipo de musical é seu favorito?:</p>
+                <select name="">
+                    <option value="">a</option>
+                    <option value="">b</option>
+                    <option value="">c</option>
+                </select>
+            </div>
+            <div class="linha">
+                <p>Qual musical você mais gostou?:</p>
+                <select name="">
+                    <option value="">a</option>
+                    <option value="">b</option>
+                    <option value="">c</option>
+                </select>
+            </div>
+            <div class="linha">
+                <p>Qual nota você dá para ele?:</p>
+                <input type="text" placeholder="Digite uma nota" id="id_nota">
+            </div>
+            <div class="linha">
+                <p>Deixe um comentário:</p>
+                <input type="text" placeholder="Digite um comentário" id="id_comentario">
+            </div>
+            <button>Enviar</button>
         </div>
-        </div>
-        
+
     </div>
 
 </body>
 
 </html>
+<script>
+    nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
+</script>

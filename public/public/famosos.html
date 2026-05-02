@@ -16,7 +16,7 @@
                 <img src="./assets/logo.png">
                 <p>Visual music</p>
             </div>
-            <h2>Bem vindo, <span>nome</span>!!</h2>
+            <h2>Bem vindo, <span id="nomeUser">nome</span>!!</h2>
             <div class="buttons">
                 <button>Dashboard</button>
                 <a href="famosos.html"><button>Musicais</button></a>
@@ -77,3 +77,6 @@
 </body>
 
 </html>
+<script>
+    nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
+</script>
