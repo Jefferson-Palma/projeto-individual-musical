@@ -325,3 +325,22 @@ a{
 .linha{
     display:flex;
 }
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:50px;
+}
+
+.container img{
+    width: 70%;
+    height: 30%;
+    border-radius: 25px;
+}
+.container iframe{
+    width: 800px;
+    height: 500px;
+    border-radius: 25px;
+}
