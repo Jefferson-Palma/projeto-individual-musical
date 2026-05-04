@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style=" background-color: #AB0505;">
+
+    <div class="sidebar">
+        <div class="rotas">
+            <div class="logo">
+                <img src="./assets/logo.png">
+                <p>Visual music</p>
+            </div>
+            <h2>Bem vindo, <span id="nomeUser">nome</span>!!</h2>
+            <div class="buttons">
+                <button>Dashboard</button>
+                <a href="famosos.html"><button>Musicais</button></a>
+                <a href="opine.html"><button>Opine</button></a>
+                <a href="index.html"><button>Sair</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="conteudoDash">
+        <div class="tituloDash">
+        <h1>Olá, <span id="nomeUser">usuario</span>!!</h1>
+        </div>
+       <div class="kpis">
+            <div class="kpi">
+                <h2>Obra favorita do público</h2>
+                <h1>titulo</h1>
+                <div class="info">
+                    <p>info</p>
+                    <p>4.5</p>
+                </div>
+            </div>
+            <div class="kpi">
+                <h2>Gênero favorito do público</h2>
+                <h1>titulo</h1>
+                <div class="info">
+                    <p>info</p>
+                    <p>4.5</p>
+                </div>
+            </div>
+            <div class="kpi">
+                <h2>Obra mais comentada</h2>
+                <h1>titulo</h1>
+                <div class="info">
+                    <p>info</p>
+                    <p>4.5</p>
+                </div>
+            </div>
+       </div>
+       <div class="dashboard">
+        <h1>Ranking por média das notas</h1>
+        <canvas id="myChart"></canvas>
+       </div>
+       <div class="dashboard">
+        <h1>Ranking por quantidade de comentários</h1>
+        <canvas id="myChart2"></canvas>
+       </div>
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9'],
+            datasets: [
+            {
+                label: 'Média nota',
+                data: [5, 4.5, 4, 3, 3.5, 4, 4.9, 4, 3],
+                borderWidth: 2,
+                borderColor: 'lightblue',
+                backgroundColor: 'blue',
+            }]
+        },
+        options: {
+            scales: {
+            x:{
+                title: {
+                            display: true,
+                            text: 'Nome musicais'
+                        }
+            },
+                y: {
+                    title: {
+                            display: true,
+                            text: 'Quantidade'
+                        },
+                    beginAtZero: true,
+
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9'],
+            datasets: [
+            {
+                label: 'Quantidade comentários',
+                data: [10, 20, 15, 30, 25, 12, 11, 13, 15],
+                borderWidth: 2,
+                borderColor: 'lightblue',
+                backgroundColor: 'blue',
+            }]
+        },
+        options: {
+            scales: {
+            x:{
+                title: {
+                            display: true,
+                            text: 'Nome musicais'
+                        }
+            },
+                y: {
+                    title: {
+                            display: true,
+                            text: 'Quantidade'
+                        },
+                    beginAtZero: true,
+
+                }
+            }
+        }
+    });
+
+</script>
