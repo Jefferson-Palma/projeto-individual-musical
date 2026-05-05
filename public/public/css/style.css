@@ -14,7 +14,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-bottom: solid 3px yellow;
+    border-bottom: solid 3px gold;
 }
 .logo{
     display: flex;
@@ -31,7 +31,7 @@ header{
 /* footer */
 footer{
     background-color: #121037;
-    border-top:solid 5px yellow;
+    border-top:solid 5px gold;
     height: 200px;
     display: flex;
     color:white;
@@ -66,12 +66,37 @@ button{
     height: 80px;
     width: 350px;
     border:none;
+    transition: 0.7s;
+    border: solid gold 2px;
+}
+button:hover{
+    transform: scale(1.1);
+}
+
+
+button:hover{
+    transform: scale(1.1);
 }
 
 a{
     text-decoration: none;
     color:white;
+    transition: 0.7s;
 
+}
+a:hover{
+    transform: scale(1.05);
+}
+
+header a:hover{
+    color:#ce0d0d;
+    transform: scale(1.1);
+}
+
+
+footer a:hover{
+    color:#ce0d0d;
+    transform: scale(1.1);
 }
 
 /* fim tags universais */
@@ -89,6 +114,7 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-bottom: solid 3px gold;
 }
 
 .frase{
@@ -104,6 +130,7 @@ a{
     background-color: #AB0505;
     justify-content: space-around;
     align-items: center;
+    border-bottom: solid 3px gold;
 }
 .padding-home{
     padding: 150px;
@@ -155,6 +182,7 @@ a{
     background-color: #121037;
     justify-content: space-around;
     align-items: center;
+    border-bottom: solid 3px gold;
 }
 
 .container-blue button{
@@ -164,6 +192,7 @@ a{
 .imagem{
     height: 350px;
     width: 600px;
+    border: 4px solid gold;
 }
 
 /*fim home page */
@@ -241,6 +270,7 @@ a{
     justify-content: center;
     align-items: center;
     gap:30px;
+    border-right: 2px gold solid;
 }
 
 .conteudoFamosos{
@@ -300,7 +330,11 @@ a{
 
 .boxes{
     display: flex;
-    justify-content: space-around;
+    margin: 10px;
+    flex-wrap:wrap;
+    justify-content: center;
+    flex-direction: row;
+    gap: 30px;
 }
 
 .musicais{
