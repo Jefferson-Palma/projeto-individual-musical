@@ -27,46 +27,11 @@
     </div>
     <div class="conteudoFamosos">
         <div class="titulos">
-        <h1>Musicais famosos</h1>
-        <h2>Escolha um musical para conhecer:</h2>
+            <h1>Musicais famosos</h1>
+            <h2>Escolha um musical para conhecer:</h2>
         </div>
-        <div class="boxes">
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
-            <a href="verMusical.html"><div class="musicais">
-                <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-                <h2>Titulo</h2>
-            </div></a>
+        <div class="boxes" id="musicais">
+
         </div>
     </div>
 
@@ -74,5 +39,29 @@
 
 </html>
 <script>
+
+    
+    
     nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
+    window.onload = exibirMusicais();
+    function exibirMusicais(){
+        fetch(`/musical/listar`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    for(let i=0;i<resposta.length;i++){
+                        musicais.innerHTML+=`<a href="verMusical.html"<div class="musicais">
+                        <img src="${resposta[i].imagem}">
+                        <h2>${resposta[i].nome}</h2></a>
+                    </div>`
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
 </script>

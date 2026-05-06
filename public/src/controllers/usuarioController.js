@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+var musicalModel = require("../models/musicalModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -25,20 +25,21 @@ function autenticar(req, res) {
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
                             senha: resultadoAutenticar[0].senha
+                            //musicais:resultadoMusicais
                         })
 //alert('sucesso');
-                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                        //     .then((resultadoAquarios) => {
-                        //         if (resultadoAquarios.length > 0) {
+                        // musicalModel.listar()
+                        //     .then((resultadoMusicais) => {
+                        //         if (resultadoMusicais.length > 0) {
                         //             res.json({
                         //                 id: resultadoAutenticar[0].id,
                         //                 email: resultadoAutenticar[0].email,
                         //                 nome: resultadoAutenticar[0].nome,
-                        //                 senha: resultadoAutenticar[0].senha
-                        //                 //aquarios: resultadoAquarios
+                        //                 senha: resultadoAutenticar[0].senha,
+                        //                 musicais: resultadoMusicais
                         //             });
                         //         } else {
-                        //             res.status(204).json({ aquarios: [] });
+                        //             res.status(204).json({ musicais: [] });
                         //         }
                         //     })
                     } else if (resultadoAutenticar.length == 0) {

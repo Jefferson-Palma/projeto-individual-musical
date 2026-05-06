@@ -1,0 +1,15 @@
+var database = require("../database/config");
+
+function buscarPorId(id) {
+  var instrucaoSql = `SELECT * FROM musical WHERE id = '${id}'`;
+
+  return database.executar(instrucaoSql);
+}
+
+function listar() {
+  var instrucaoSql = `SELECT id, nome, imagem FROM musical`;
+
+  return database.executar(instrucaoSql);
+}
+
+module.exports = { buscarPorId, listar };
