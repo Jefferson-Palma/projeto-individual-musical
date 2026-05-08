@@ -412,7 +412,6 @@ footer a:hover{
 }
 
 .conteudoDash{
-    padding-top: 50px;
     background-color: #AB0505;
     margin-left: 25%;
     width: 75%;
@@ -435,9 +434,6 @@ footer a:hover{
 
 .forms{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: #121037;
     border-radius: 15px;
     gap:20px;
@@ -462,10 +458,21 @@ footer a:hover{
     padding-top: 50px;
     background-color: #AB0505;
     margin-left: 25%;
+    padding-left: 15%;
+    padding-right: 15%;
     color:white;
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap:50px;
     padding-bottom: 30px;
+}
+
+.linha input, textarea{
+    border-radius: 8px;
+    height: 30px;
+}
+
+#id_comentario{
+    height: 100px;
 }
