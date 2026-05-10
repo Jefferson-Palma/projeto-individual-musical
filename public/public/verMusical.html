@@ -27,18 +27,21 @@
     </div>
     <div class="conteudoFamosos">
         <div class="titulos">
-        <h1>Titulo</h1>
+        <h1 id="id_titulo">Titulo</h1>
         </div>
-        <div class="container">
-            <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-            <p>Descrição</p>
+        <div class="container" id="img_desc">
+            <!-- <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
+            <p>Descrição</p> -->
         </div>    
         <div class="container">
             <h1>trailer</h1>
-            <iframe src="https://www.youtube.com/embed/MZsYDpafGTY?si=0rXfpF-wJsdKSdjk" allowfullscreen></iframe>
+            <!-- <iframe src="https://www.youtube.com/embed/MZsYDpafGTY?si=0rXfpF-wJsdKSdjk" allowfullscreen></iframe> -->
+            <div id="trailer"></div>
         </div>
         <div class="container">
-            <h1>Avaliações</h1>
+            <div class="titulos">
+                <h1>Avaliações</h1>
+            </div>
             <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
         </div>
     </div>
@@ -49,4 +52,25 @@
 </html>
 <script>
     nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
+    window.onload=exibirMusical();
+    function exibirMusical(){
+        fetch(`/musical/buscar/${sessionStorage.ID_MUSICAL}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    id_titulo.innerHTML=resposta[0].nome;
+
+                    img_desc.innerHTML=`<img src="${resposta[0].imagem}"></img>
+                    <p>${resposta[0].descricao}</p>`
+
+                    trailer.innerHTML=`<iframe src="${resposta[0].trailer}" allowfullscreen></iframe>`
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
 </script>

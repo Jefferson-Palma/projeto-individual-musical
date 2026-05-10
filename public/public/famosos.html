@@ -49,12 +49,12 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    for(let i=0;i<resposta.length;i++){
-                        musicais.innerHTML+=`<a href="verMusical.html"<div class="musicais">
-                        <img src="${resposta[i].imagem}">
-                        <h2>${resposta[i].nome}</h2></a>
+                    resposta.forEach(item => {
+                        musicais.innerHTML+=`<a onclick="navegarPagina(${item.id})"<div class="musicais">
+                        <img src="${item.imagem}">
+                        <h2>${item.nome}</h2></a>
                     </div>`
-                    }
+                    });
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -63,5 +63,13 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
+    }
+
+
+    function navegarPagina(idMusical){
+        sessionStorage.ID_MUSICAL=idMusical
+        setTimeout(function () {
+            window.location = "verMusical.html";
+        }, 1000);
     }
 </script>

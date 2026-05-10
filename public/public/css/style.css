@@ -468,11 +468,19 @@ footer a:hover{
     padding-bottom: 30px;
 }
 
-.linha input, textarea{
+.linha input, textarea, select{
     border-radius: 8px;
     height: 30px;
 }
 
 #id_comentario{
     height: 100px;
+}
+
+.container p{
+    font-size: 30px;
+    width: 70%;
+}
+.ttulos h1{
+    font-size: 100px;
 }

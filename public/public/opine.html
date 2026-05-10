@@ -31,32 +31,22 @@
                 <h1>Nos de sua opinião</h1>
             </div>
             <div class="alinhamento">
-                <!-- <div class="linha">
-                    <h2>Qual tipo de musical é seu favorito?</h2>
-                    <select name="">
-                        <option value="">a</option>
-                        <option value="">b</option>
-                        <option value="">c</option>
-                    </select>
-                </div> -->
+                
                 <div class="linha">
                     <h2>Qual musical você mais gostou?</h2>
-                    <select name="">
-                        <option value="">a</option>
-                        <option value="">b</option>
-                        <option value="">c</option>
-                    </select>
+                     <select name="" id="musicais"></select>
                 </div>
                 <div class="linha">
                     <h2>Qual nota você dá para ele?</h2>
-                    <input type="text" placeholder="Digite uma nota" id="id_nota">
+                    <input type="text" placeholder="Digite uma nota de 0 a 5" id="id_nota">
                 </div>
                 <div class="linha">
                     <h2>Deixe um comentário:</h2>
                     <textarea cols="30" rows="5" type="text" placeholder="Digite um comentário" id="id_comentario"></textarea>
                 </div>
             </div>
-            <button>Enviar</button>
+            <button onclick="cadastrarOpiniao()">Enviar</button>
+            
         </div>
 
     </div>
@@ -66,4 +56,81 @@
 </html>
 <script>
     nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
+
+    window.onload = chamarMusicais();
+    function chamarMusicais(){
+        fetch(`/musical/listar`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.forEach(item => {
+                        musicais.innerHTML+=`<option value="${item.id}">${item.nome}</option>`
+                    });
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
+
+    function cadastrarOpiniao(){
+        let numeros=[0,1,2,3,4,5,6,7,8,9]
+        let musical=musicais.value;
+        let nota=id_nota.value;
+        let contador=0;
+        let comentario=id_comentario.value;
+        for(let i=0;i<nota.length;i++){
+            for(let j=0;j<numeros.length;j++){
+                if(nota[i]==numeros[j]){
+                    contador++
+                }
+            }
+        }
+        if(contador!=nota.length || nota>5 || nota<0){
+            alert("Nota inválida")
+            return
+        }
+
+        
+        fetch("/opine/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idMusical: musical,
+        idUsuario: sessionStorage.ID_USUARIO,
+        opiniao: comentario,//campo cpf
+        notaMusical: nota,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          //cardErro.style.display = "block";
+
+          alert(
+            "Avaliação registrada com sucesso!!"
+)
+          setTimeout(() => {
+            window.location = "famosos.html";
+          }, "2000");
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        //finalizarAguardar();
+      });
+
+    return false;
+    }
 </script>
