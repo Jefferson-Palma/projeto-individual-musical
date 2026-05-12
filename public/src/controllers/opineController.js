@@ -37,7 +37,26 @@ function cadastrar(req, res) {
             );
     }
 }
+function buscarObra(req, res){
+    opineModel.buscarObra().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function buscarGenero(req, res){
+    opineModel.buscarGenero().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+function buscarComentario(req, res){
+    opineModel.buscarComentario().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
 
 module.exports = {
-    cadastrar
+    cadastrar,
+    buscarComentario,
+    buscarGenero,
+    buscarObra
 }

@@ -17,7 +17,7 @@
                 <img src="./assets/logo.png">
                 <p>Visual music</p>
             </div>
-            <h2>Bem vindo, <span id="nomeUser">nome</span>!!</h2>
+            <!-- <h2>Bem vindo, <span id="nomeUser">nome</span>!!</h2> -->
             <div class="buttons">
                 <button>Dashboard</button>
                 <a href="famosos.html"><button>Musicais</button></a>
@@ -33,26 +33,26 @@
        <div class="kpis">
             <div class="kpi">
                 <h2>Obra favorita do público</h2>
-                <h1>titulo</h1>
+                <h1 id="obraFavorita">titulo</h1>
                 <div class="info">
                     <p>Média de nota da obra</p>
-                    <p>4.5</p>
+                    <p id="mediaObra">4.5</p>
                 </div>
             </div>
             <div class="kpi">
                 <h2>Gênero favorito do público</h2>
-                <h1>titulo</h1>
+                <h1 id="generoFavorito">titulo</h1>
                 <div class="info">
                     <p>Média de nota do gênero</p>
-                    <p>4.5</p>
+                    <p id="mediaGenero">4.5</p>
                 </div>
             </div>
             <div class="kpi">
                 <h2>Obra mais comentada</h2>
-                <h1>titulo</h1>
+                <h1 id="nomeComentario">titulo</h1>
                 <div class="info">
                     <p>Quantidade comentários</p>
-                    <p>4.5</p>
+                    <p id="qtdComentario">4.5</p>
                 </div>
             </div>
        </div>
@@ -73,7 +73,7 @@
 <script>
     nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
     const ctx = document.getElementById('myChart');
-
+    Chart.defaults.color = '#FFF';
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -88,18 +88,22 @@
             }]
         },
         options: {
+        indexAxis: 'y',
             scales: {
-            x:{
+            y:{
+                
                 title: {
                             display: true,
                             text: 'Nome musicais'
                         }
             },
-                y: {
+                x: {
+                    
                     title: {
                             display: true,
                             text: 'Quantidade'
                         },
+                    
                     beginAtZero: true,
 
                 }
@@ -109,6 +113,7 @@
 
     const ctx2 = document.getElementById('myChart2');
 
+    Chart.defaults.color = '#FFF';
     new Chart(ctx2, {
         type: 'bar',
         data: {
@@ -123,14 +128,15 @@
             }]
         },
         options: {
+            indexAxis: 'y',
             scales: {
-            x:{
+            y:{
                 title: {
                             display: true,
                             text: 'Nome musicais'
                         }
             },
-                y: {
+                x: {
                     title: {
                             display: true,
                             text: 'Quantidade'
@@ -141,5 +147,71 @@
             }
         }
     });
+    window.onload = chamarKpis();
+    function chamarKpis(){
+        buscarGenero();
+        buscarComentario();
+        buscarObra();        
+
+ 
+    }
+
+
+    function buscarComentario(){
+        fetch(`/opine/buscarComentario`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    nomeComentario.innerHTML=resposta[0].nome;
+                    qtdComentario.innerHTML=resposta[0].qtdAvaliacao;
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+
+    }
+    function buscarObra(){
+        fetch(`/opine/buscarObra`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    obraFavorita.innerHTML=resposta[0].nome;
+                    mediaObra.innerHTML=resposta[0].mediaNota;
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+
+    }
+    function buscarGenero(){
+        fetch(`/opine/buscarGenero`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    mediaGenero.innerHTML=resposta[0].mediaNota;
+                    generoFavorito.innerHTML=resposta[0].tipoMusical;
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+
+
+    }
+    
 
 </script>

@@ -13,7 +13,32 @@ function cadastrar(fkUsuario, fkMusical, comentario, nota) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscarGenero(){
+    var instrucaoSql=`SELECT musical.tipoMusical, TRUNCATE(AVG(nota),1) AS mediaNota FROM pesquisa 
+    JOIN musical ON id=fkMusical
+    GROUP BY tipoMusical ORDER BY mediaNota DESC LIMIT 1;`;
+    return database.executar(instrucaoSql);
+}
+function buscarComentario(){
+    var instrucaoSql=` SELECT musical.nome, TRUNCATE(COUNT(idPesquisa),0) AS qtdAvaliacao FROM pesquisa 
+    JOIN musical ON id=fkMusical
+    GROUP BY fkMusical ORDER BY qtdAvaliacao DESC LIMIT 1;`;
+    return database.executar(instrucaoSql);
+}
+
+function buscarObra(){
+    var instrucaoSql = `SELECT musical.nome, TRUNCATE(AVG(nota),1) AS mediaNota FROM pesquisa
+    JOIN musical ON id=fkMusical 
+    GROUP BY fkMusical ORDER BY mediaNota DESC LIMIT 1;
+`;
+
+   return database.executar(instrucaoSql);
+    
+}
 
 module.exports = {
-    cadastrar
+    cadastrar,
+    buscarComentario,
+    buscarGenero,
+    buscarObra
 };

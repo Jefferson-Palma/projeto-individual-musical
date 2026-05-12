@@ -10,7 +10,7 @@ function validarSessao() {
         b_usuario.innerHTML = nome;
       //  b_cpf.innerHTML=cpf; 
     } else {
-        window.location = "../login.html";
+        window.location = "../loginn.html";
     }
 }
 

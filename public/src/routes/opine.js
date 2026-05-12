@@ -8,4 +8,16 @@ router.post("/cadastrar", function (req, res) {
     opineController.cadastrar(req, res);
 })
 
+router.get("/buscarComentario", function (req, res) {
+    opineController.buscarComentario(req, res);
+})
+
+router.get("/buscarGenero", function (req, res) {
+    opineController.buscarGenero(req, res);
+})
+
+router.get("/buscarObra", function (req, res) {
+    opineController.buscarObra(req, res);
+})
+
 module.exports = router;

@@ -49,12 +49,18 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.forEach(item => {
-                        musicais.innerHTML+=`<a onclick="navegarPagina(${item.id})"<div class="musicais">
-                        <img src="${item.imagem}">
-                        <h2>${item.nome}</h2></a>
+                    for(let i=0;i<resposta.length;i++){
+                        musicais.innerHTML+=`<a onclick="navegarPagina(${resposta[i].id})"<div class="musicais">
+                        <img src="${resposta[i].imagem}">
+                        <h2>${resposta[i].nome}</h2></a>
                     </div>`
-                    });
+                    }
+                    // resposta.forEach(item => {
+                    //     musicais.innerHTML+=`<a onclick="navegarPagina(${item.id})"<div class="musicais">
+                    //     <img src="${item.imagem}">
+                    //     <h2>${item.nome}</h2></a>
+                    // </div>`
+                    // });
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
