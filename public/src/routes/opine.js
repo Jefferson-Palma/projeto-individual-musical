@@ -20,4 +20,8 @@ router.get("/buscarObra", function (req, res) {
     opineController.buscarObra(req, res);
 })
 
+router.get("/buscarRegistro", function (req, res) {
+    opineController.buscarRegistro(req, res);
+})
+
 module.exports = router;

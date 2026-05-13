@@ -53,10 +53,16 @@ function buscarComentario(req, res){
         res.status(200).json(resultado);
     });
 }
+function buscarRegistro(req, res){
+    opineModel.buscarRegistro().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
 
 module.exports = {
     cadastrar,
     buscarComentario,
     buscarGenero,
-    buscarObra
+    buscarObra,
+    buscarRegistro
 }
