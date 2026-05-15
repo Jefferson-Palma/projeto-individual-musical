@@ -25,6 +25,13 @@ function buscarComentario(){
     GROUP BY fkMusical ORDER BY qtdAvaliacao DESC LIMIT 1;`;
     return database.executar(instrucaoSql);
 }
+function buscarQtdComentario(){
+    var instrucaoSql=` 
+SELECT musical.nome, COUNT(idPesquisa) AS qtdAvaliacao FROM pesquisa 
+JOIN musical ON id=fkMusical
+ GROUP BY fkMusical ORDER BY qtdAvaliacao;`;
+    return database.executar(instrucaoSql);
+}
 
 function buscarObra(){
     var instrucaoSql = `SELECT musical.nome, TRUNCATE(AVG(nota),1) AS mediaNota FROM pesquisa
@@ -50,5 +57,6 @@ module.exports = {
     buscarComentario,
     buscarGenero,
     buscarObra,
-    buscarRegistro
+    buscarRegistro,
+    buscarQtdComentario
 };

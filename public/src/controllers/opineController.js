@@ -53,6 +53,11 @@ function buscarComentario(req, res){
         res.status(200).json(resultado);
     });
 }
+function buscarQtdComentario(req, res){
+    opineModel.buscarQtdComentario().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
 function buscarRegistro(req, res){
     opineModel.buscarRegistro().then((resultado) => {
         res.status(200).json(resultado);
@@ -64,5 +69,6 @@ module.exports = {
     buscarComentario,
     buscarGenero,
     buscarObra,
-    buscarRegistro
+    buscarRegistro,
+    buscarQtdComentario
 }

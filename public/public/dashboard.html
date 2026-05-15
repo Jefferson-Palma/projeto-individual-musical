@@ -73,17 +73,21 @@
 <script>
     nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
 
-    window.onload= obterDadosGrafico();
+    window.onload=obterDadosGrafico();
+function obterDadosGrafico(){
+    obterDadosGrafico1();
+    obterDadosGrafico2();
+}
 
-    function obterDadosGrafico() {
+    function obterDadosGrafico1() {
         fetch(`/opine/buscarRegistro`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+                    //resposta.reverse();
                     console.log(JSON.stringify(resposta));
 
-                    plotarGrafico(resposta);
+                    plotarGrafico1(resposta);
 
                 });
             } else {
@@ -95,7 +99,28 @@
             });
     }
 
-    function plotarGrafico(resposta) {
+    
+    function obterDadosGrafico2() {
+        fetch(`/opine/buscarQtdComentario`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    //resposta.reverse();
+                    console.log(JSON.stringify(resposta));
+
+                    plotarGrafico2(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGrafico1(resposta) {
 
         console.log('iniciando plotagem do gráfico...');
 
@@ -106,19 +131,14 @@
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Umidade',
+                label: 'Média das notas',
+                indexAxis: 'y',
                 data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
+                borderWidth: 2,
+                borderColor: 'lightblue',
+                backgroundColor: 'blue',
+            }
+        ]
         };
 
         console.log('----------------------------------------------')
@@ -127,8 +147,8 @@
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.nome);
+            var registro = resposta[i];//pega a linha
+            labels.push(registro.nome);//joga no label
             dados.datasets[0].data.push(registro.media_notas);
             // dados.datasets[1].data.push(registro.temperatura);
         }
@@ -145,6 +165,7 @@
         const config = {
             type: 'bar',
             data: dados,
+            
         };
 
         // Adicionando gráfico criado em div na tela
@@ -154,9 +175,73 @@
         );
         myChart.update();
 
-        setInterval(() => obterDadosGrafico(), 2000);
+      //  setInterval(() => obterDadosGrafico(), 2000);
+    }
+    let contador=0;
+    function plotarGrafico2(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+        
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Média das notas',
+                indexAxis: 'y',
+                data: [],
+                borderWidth: 2,
+                borderColor: 'lightblue',
+                backgroundColor: 'blue',
+            }
+        ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.nome);
+            dados.datasets[0].data.push(registro.qtdAvaliacao);
+            // dados.datasets[1].data.push(registro.temperatura);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            
+        };
+
+        // Adicionando gráfico criado em div na tela
+        if(contador==0){
+            
+        var myChart2 = new Chart(
+            document.getElementById(`myChart2`),
+            config
+        );
+        }else{
+           // myChart2.update();
+        }
+        contador++
+
+        setInterval(() => obterDadosGrafico2(), 2000);
     }
 
+   
     // function atualizarGrafico(dados, myChart) {
 
 
@@ -263,49 +348,49 @@
     //     }
     // });
 
-    const ctx2 = document.getElementById('myChart2');
+    // const ctx2 = document.getElementById('myChart2');
 
-    Chart.defaults.color = '#FFF';
-    new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9'],
-            datasets: [
-            {
-                label: 'Quantidade comentários',
-                data: [10, 20, 15, 30, 25, 12, 11, 13, 15],
-                borderWidth: 2,
-                borderColor: 'lightblue',
-                backgroundColor: 'blue',
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            scales: {
-            y:{
-                title: {
-                            display: true,
-                            text: 'Nome musicais'
-                        }
-            },
-                x: {
-                    title: {
-                            display: true,
-                            text: 'Quantidade'
-                        },
-                    beginAtZero: true,
+     Chart.defaults.color = '#FFF';
+    // new Chart(ctx2, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9'],
+    //         datasets: [
+    //         {
+    //             label: 'Quantidade comentários',
+    //             data: [10, 20, 15, 30, 25, 12, 11, 13, 15],
+    //             borderWidth: 2,
+    //             borderColor: 'lightblue',
+    //             backgroundColor: 'blue',
+    //         }]
+    //     },
+    //     options: {
+    //         indexAxis: 'y',
+    //         scales: {
+    //         y:{
+    //             title: {
+    //                         display: true,
+    //                         text: 'Nome musicais'
+    //                     }
+    //         },
+    //             x: {
+    //                 title: {
+    //                         display: true,
+    //                         text: 'Quantidade'
+    //                     },
+    //                 beginAtZero: true,
 
-                }
-            }
-        }
-    });
+    //             }
+    //         }
+    //     }
+    // });
     window.onload = chamarKpis();
     function chamarKpis(){
         buscarGenero();
         buscarComentario();
         buscarObra();        
 
- 
+        setTimeout(() => chamarKpis(), 10000);
     }
 
 
@@ -316,7 +401,6 @@
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     nomeComentario.innerHTML=resposta[0].nome;
                     qtdComentario.innerHTML=resposta[0].qtdAvaliacao;
-                    
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
