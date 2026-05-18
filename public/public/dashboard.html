@@ -28,9 +28,9 @@
     </div>
     <div class="conteudoDash">
         <div class="tituloDash">
-        <h1>Olá, <span id="nomeUser">usuario</span>!!</h1>
+            <h1>Olá, <span id="nomeUser">usuario</span>!!</h1>
         </div>
-       <div class="kpis">
+        <div class="kpis">
             <div class="kpi">
                 <h2>Obra favorita do público</h2>
                 <h1 id="obraFavorita">titulo</h1>
@@ -55,15 +55,15 @@
                     <p id="qtdComentario">4.5</p>
                 </div>
             </div>
-       </div>
-       <div class="dashboard">
-        <h1>Ranking por média das notas</h1>
-        <canvas id="myChart"></canvas>
-       </div>
-       <div class="dashboard">
-        <h1>Ranking por quantidade de comentários</h1>
-        <canvas id="myChart2"></canvas>
-       </div>
+        </div>
+        <div class="dashboard">
+            <h1>Ranking por média das notas</h1>
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="dashboard">
+            <h1>Ranking por quantidade de comentários</h1>
+            <canvas id="myChart2"></canvas>
+        </div>
 
     </div>
 
@@ -71,13 +71,14 @@
 
 </html>
 <script>
-    nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
+    nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
 
-    window.onload=obterDadosGrafico();
-function obterDadosGrafico(){
-    obterDadosGrafico1();
-    obterDadosGrafico2();
-}
+
+    window.onload = obterDadosGrafico();
+    function obterDadosGrafico() {
+        obterDadosGrafico1();
+        obterDadosGrafico2();
+    }   
 
     function obterDadosGrafico1() {
         fetch(`/opine/buscarRegistro`, { cache: 'no-store' }).then(function (response) {
@@ -99,8 +100,9 @@ function obterDadosGrafico(){
             });
     }
 
-    
+
     function obterDadosGrafico2() {
+
         fetch(`/opine/buscarQtdComentario`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
@@ -138,7 +140,7 @@ function obterDadosGrafico(){
                 borderColor: 'lightblue',
                 backgroundColor: 'blue',
             }
-        ]
+            ]
         };
 
         console.log('----------------------------------------------')
@@ -165,7 +167,7 @@ function obterDadosGrafico(){
         const config = {
             type: 'bar',
             data: dados,
-            
+
         };
 
         // Adicionando gráfico criado em div na tela
@@ -174,14 +176,12 @@ function obterDadosGrafico(){
             config
         );
         myChart.update();
-
-      //  setInterval(() => obterDadosGrafico(), 2000);
+        setInterval(() => atualizarGrafico1(dados, myChart1), 2000);
     }
-    let contador=0;
-    function plotarGrafico2(resposta) {
 
+    function plotarGrafico2(resposta) {
         console.log('iniciando plotagem do gráfico...');
-        
+
         // Criando estrutura para plotar gráfico - labels
         let labels = [];
 
@@ -189,14 +189,14 @@ function obterDadosGrafico(){
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Média das notas',
+                label: 'Quantidade comentários',
                 indexAxis: 'y',
                 data: [],
                 borderWidth: 2,
                 borderColor: 'lightblue',
                 backgroundColor: 'blue',
             }
-        ]
+            ]
         };
 
         console.log('----------------------------------------------')
@@ -205,8 +205,8 @@ function obterDadosGrafico(){
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.nome);
+            var registro = resposta[i];//pega a linha
+            labels.push(registro.nome);//joga no label
             dados.datasets[0].data.push(registro.qtdAvaliacao);
             // dados.datasets[1].data.push(registro.temperatura);
         }
@@ -223,80 +223,86 @@ function obterDadosGrafico(){
         const config = {
             type: 'bar',
             data: dados,
-            
+
         };
 
-        // Adicionando gráfico criado em div na tela
-        if(contador==0){
-            
         var myChart2 = new Chart(
             document.getElementById(`myChart2`),
             config
-        );
-        }else{
-           // myChart2.update();
-        }
-        contador++
+        )
 
-        setInterval(() => obterDadosGrafico2(), 2000);
+        // Adicionando gráfico criado em div na tela
+
+        //myChart2.update();
+
+        //setInterval(() => obterDadosGrafico2(), 7000);
+        setInterval(() => atualizarGrafico2(dados, myChart2), 2000);
     }
 
-   
-    // function atualizarGrafico(dados, myChart) {
 
+    function atualizarGrafico2(dados, myChart) {
+        fetch(`/opine/buscarQtdComentario`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    //resposta.reverse();
+                    console.log(JSON.stringify(resposta));
+                    //plotarGrafico2(resposta);
+                    let labelNovos = []
+                    let dadosNovos = []
+                    for (i = 0; i < resposta.length; i++) {
+                        var registro = resposta[i];//pega a linha
+                        labelNovos.push(registro.nome);//joga no label
+                        dadosNovos.push(registro.qtdAvaliacao);
+                        // dados.datasets[1].data.push(registro.temperatura);
+                    }
+                    dados.datasets[0].data = dadosNovos;
+                    dados.labels = labelNovos;
+                    console.log(dados);
+                    myChart.update();
 
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
 
-    //     fetch(`/medidas/tempo-real/`, { cache: 'no-store' }).then(function (response) {
-    //         if (response.ok) {
-    //             response.json().then(function (novoRegistro) {
+    }
+    
+    function atualizarGrafico1(dados, myChart) {
+        fetch(`/opine/buscarRegistro`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    //resposta.reverse();
+                    console.log(JSON.stringify(resposta));
+                    //plotarGrafico2(resposta);
+                    let labelNovos = []
+                    let dadosNovos = []
+                    for (i = 0; i < resposta.length; i++) {
+                        var registro = resposta[i];//pega a linha
+                        labelNovos.push(registro.nome);//joga no label
+                        dadosNovos.push(registro.media_notas);
+                        // dados.datasets[1].data.push(registro.temperatura);
+                    }
+                    dados.datasets[0].data = dadosNovos;
+                    dados.labels = labelNovos;
+                    console.log(dados);
+                    myChart.update();
 
-    //                 obterdados(idAquario);
-    //                 // alertar(novoRegistro, idAquario);
-    //                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-    //                 console.log(`Dados atuais do gráfico:`);
-    //                 console.log(dados);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
 
-    //                 let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
-    //                 avisoCaptura.innerHTML = ""
-
-
-    //                 if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-    //                     console.log("---------------------------------------------------------------")
-    //                     console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-    //                     avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-    //                     console.log("Horário do novo dado capturado:")
-    //                     console.log(novoRegistro[0].momento_grafico)
-    //                     console.log("Horário do último dado capturado:")
-    //                     console.log(dados.labels[dados.labels.length - 1])
-    //                     console.log("---------------------------------------------------------------")
-    //                 } else {
-    //                     // tirando e colocando valores no gráfico
-    //                     dados.labels.shift(); // apagar o primeiro
-    //                     dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-    //                     dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-    //                     dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-
-    //                     dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-    //                     dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-    //                     myChart.update();
-    //                 }
-
-    //                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-    //                 proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    //             });
-    //         } else {
-    //             console.error('Nenhum dado encontrado ou erro na API');
-    //             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-    //             proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    //         }
-    //     })
-    //         .catch(function (error) {
-    //             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    //         });
-
-    // }
+    }
 
 
 
@@ -328,19 +334,19 @@ function obterDadosGrafico(){
     //     indexAxis: 'y',
     //         scales: {
     //         y:{
-                
+
     //             title: {
     //                         display: true,
     //                         text: 'Nome musicais'
     //                     }
     //         },
     //             x: {
-                    
+
     //                 title: {
     //                         display: true,
     //                         text: 'Quantidade'
     //                     },
-                    
+
     //                 beginAtZero: true,
 
     //             }
@@ -350,7 +356,7 @@ function obterDadosGrafico(){
 
     // const ctx2 = document.getElementById('myChart2');
 
-     Chart.defaults.color = '#FFF';
+    Chart.defaults.color = '#FFF';
     // new Chart(ctx2, {
     //     type: 'bar',
     //     data: {
@@ -384,23 +390,23 @@ function obterDadosGrafico(){
     //         }
     //     }
     // });
-    window.onload = chamarKpis();
-    function chamarKpis(){
+    //window.onload = chamarKpis();
+    function chamarKpis() {
         buscarGenero();
         buscarComentario();
-        buscarObra();        
+        buscarObra();
 
         setTimeout(() => chamarKpis(), 10000);
     }
 
 
-    function buscarComentario(){
+    function buscarComentario() {
         fetch(`/opine/buscarComentario`).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    nomeComentario.innerHTML=resposta[0].nome;
-                    qtdComentario.innerHTML=resposta[0].qtdAvaliacao;
+                    nomeComentario.innerHTML = resposta[0].nome;
+                    qtdComentario.innerHTML = resposta[0].qtdAvaliacao;
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -411,14 +417,14 @@ function obterDadosGrafico(){
             });
 
     }
-    function buscarObra(){
+    function buscarObra() {
         fetch(`/opine/buscarObra`).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    obraFavorita.innerHTML=resposta[0].nome;
-                    mediaObra.innerHTML=resposta[0].mediaNota;
-                    
+                    obraFavorita.innerHTML = resposta[0].nome;
+                    mediaObra.innerHTML = resposta[0].mediaNota;
+
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -426,17 +432,17 @@ function obterDadosGrafico(){
         })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
+            });
 
     }
-    function buscarGenero(){
+    function buscarGenero() {
         fetch(`/opine/buscarGenero`).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    mediaGenero.innerHTML=resposta[0].mediaNota;
-                    generoFavorito.innerHTML=resposta[0].tipoMusical;
-                    
+                    mediaGenero.innerHTML = resposta[0].mediaNota;
+                    generoFavorito.innerHTML = resposta[0].tipoMusical;
+
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -448,6 +454,6 @@ function obterDadosGrafico(){
 
 
     }
-    
+
 
 </script>
