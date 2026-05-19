@@ -17,9 +17,6 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-var avisosRouter = require("./src/routes/avisos");
-var medidasRouter = require("./src/routes/medidas");
-var aquariosRouter = require("./src/routes/aquarios");
 var opineRouter = require("./src/routes/opine");
 var musicalRouter = require("./src/routes/musical");
 
@@ -32,9 +29,6 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/musical", musicalRouter);
-app.use("/avisos", avisosRouter);
-app.use("/medidas", medidasRouter);
-app.use("/aquarios", aquariosRouter);
 app.use("/opine", opineRouter);
 
 app.listen(PORTA_APP, function () {
