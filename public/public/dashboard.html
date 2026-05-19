@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/sessao.js"></script>
 </head>
 
 <body style=" background-color: #AB0505;">
@@ -17,12 +18,12 @@
                 <img src="./assets/logo.png">
                 <p>Visual music</p>
             </div>
-            <!-- <h2>Bem vindo, <span id="nomeUser">nome</span>!!</h2> -->
+            
             <div class="buttons">
                 <button>Dashboard</button>
                 <a href="famosos.html"><button>Musicais</button></a>
                 <a href="opine.html"><button>Opine</button></a>
-                <a href="index.html"><button>Sair</button></a>
+                <a><button onclick="limparSessao()">Sair</button></a>
             </div>
         </div>
     </div>
@@ -73,7 +74,7 @@
 <script>
     nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
 
-
+    window.onload=validarSessao();
     window.onload = obterDadosGrafico();
     function obterDadosGrafico() {
         obterDadosGrafico1();
@@ -107,7 +108,6 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    //resposta.reverse();
                     console.log(JSON.stringify(resposta));
 
                     plotarGrafico2(resposta);
@@ -152,7 +152,6 @@
             var registro = resposta[i];//pega a linha
             labels.push(registro.nome);//joga no label
             dados.datasets[0].data.push(registro.media_notas);
-            // dados.datasets[1].data.push(registro.temperatura);
         }
 
         console.log('----------------------------------------------')
@@ -176,7 +175,7 @@
             config
         );
         myChart.update();
-        setInterval(() => atualizarGrafico1(dados, myChart1), 2000);
+        setInterval(() => atualizarGrafico1(dados, myChart), 10000);
     }
 
     function plotarGrafico2(resposta) {
@@ -208,7 +207,6 @@
             var registro = resposta[i];//pega a linha
             labels.push(registro.nome);//joga no label
             dados.datasets[0].data.push(registro.qtdAvaliacao);
-            // dados.datasets[1].data.push(registro.temperatura);
         }
 
         console.log('----------------------------------------------')
@@ -230,13 +228,7 @@
             document.getElementById(`myChart2`),
             config
         )
-
-        // Adicionando gráfico criado em div na tela
-
-        //myChart2.update();
-
-        //setInterval(() => obterDadosGrafico2(), 7000);
-        setInterval(() => atualizarGrafico2(dados, myChart2), 2000);
+        setInterval(() => atualizarGrafico2(dados, myChart2), 10000);
     }
 
 
@@ -247,7 +239,6 @@
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     //resposta.reverse();
                     console.log(JSON.stringify(resposta));
-                    //plotarGrafico2(resposta);
                     let labelNovos = []
                     let dadosNovos = []
                     for (i = 0; i < resposta.length; i++) {
@@ -260,6 +251,7 @@
                     dados.labels = labelNovos;
                     console.log(dados);
                     myChart.update();
+                    setInterval(() => atualizarGrafico2(dados, myChart), 10000);
 
                 });
             } else {
@@ -292,6 +284,7 @@
                     dados.labels = labelNovos;
                     console.log(dados);
                     myChart.update();
+                    setInterval(() => atualizarGrafico1(dados, myChart), 2000);
 
                 });
             } else {
@@ -314,83 +307,9 @@
 
 
 
-
-    // const ctx = document.getElementById('myChart');
-    // Chart.defaults.color = '#FFF';
-    // new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9'],
-    //         datasets: [
-    //         {
-    //             label: 'Média nota',
-    //             data: [5, 4.5, 4, 3, 3.5, 4, 4.9, 4, 3],
-    //             borderWidth: 2,
-    //             borderColor: 'lightblue',
-    //             backgroundColor: 'blue'
-    //         }]
-    //     },
-    //     options: {
-    //     indexAxis: 'y',
-    //         scales: {
-    //         y:{
-
-    //             title: {
-    //                         display: true,
-    //                         text: 'Nome musicais'
-    //                     }
-    //         },
-    //             x: {
-
-    //                 title: {
-    //                         display: true,
-    //                         text: 'Quantidade'
-    //                     },
-
-    //                 beginAtZero: true,
-
-    //             }
-    //         }
-    //     }
-    // });
-
-    // const ctx2 = document.getElementById('myChart2');
-
     Chart.defaults.color = '#FFF';
-    // new Chart(ctx2, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9'],
-    //         datasets: [
-    //         {
-    //             label: 'Quantidade comentários',
-    //             data: [10, 20, 15, 30, 25, 12, 11, 13, 15],
-    //             borderWidth: 2,
-    //             borderColor: 'lightblue',
-    //             backgroundColor: 'blue',
-    //         }]
-    //     },
-    //     options: {
-    //         indexAxis: 'y',
-    //         scales: {
-    //         y:{
-    //             title: {
-    //                         display: true,
-    //                         text: 'Nome musicais'
-    //                     }
-    //         },
-    //             x: {
-    //                 title: {
-    //                         display: true,
-    //                         text: 'Quantidade'
-    //                     },
-    //                 beginAtZero: true,
-
-    //             }
-    //         }
-    //     }
-    // });
-    //window.onload = chamarKpis();
+ 
+    window.onload = chamarKpis();
     function chamarKpis() {
         buscarGenero();
         buscarComentario();

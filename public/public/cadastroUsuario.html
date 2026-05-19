@@ -90,7 +90,7 @@
         }
 
         //validação email
-        if(email==''|| !email.includes('@')|| !email.endsWith('.')){
+        if(email==''|| !email.includes('@')|| !email.includes('.')){
             id_erro_email.innerHTML=`Email inválido`
             invalido++
         }
@@ -134,9 +134,6 @@
           setTimeout(() => {
             window.location = "loginn.html";
           }, "2000");
-
-          //limparFormulario();
-          //finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
