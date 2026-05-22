@@ -27,4 +27,8 @@ router.get("/buscarRegistro", function (req, res) {
     opineController.buscarRegistro(req, res);
 })
 
+router.get("/buscar/:id", function (req, res) {
+  opineController.buscarPorId(req, res);
+});
+
 module.exports = router;

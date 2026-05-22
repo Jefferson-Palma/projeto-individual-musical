@@ -74,13 +74,13 @@
         let invalido=0;
         // validação nome
         if(!nome==''){
-            for(let i=0; i<numeros.length;i++){
-                for(let j=0;j<nome.length;j++){
-                    if(numeros[i]==nome[j]){
-                        nomeInvalido++;
-                    }
+            // for(let i=0; i<numeros.length;i++){
+            for(let i=0;i<nome.length;i++){
+                if(nome[i].toLowerCase()==nome[i].toUpperCase()){
+                    nomeInvalido++;
                 }
             }
+            // }
         }else{
             nomeInvalido++
         }
@@ -117,8 +117,8 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nome,
         emailServer: email,
+        senhaServer: senha
     //    cpfServer: cpfVar,//campo cpf
-        senhaServer: senha,
     //    idEmpresaVincularServer: idEmpresaVincular
       }),
     })

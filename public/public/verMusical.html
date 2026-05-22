@@ -39,11 +39,11 @@
             <!-- <iframe src="https://www.youtube.com/embed/MZsYDpafGTY?si=0rXfpF-wJsdKSdjk" allowfullscreen></iframe> -->
             <div id="trailer"></div>
         </div>
-        <div class="container">
-            <div class="titulos">
+        <div class="titulos">
                 <h1>Avaliações</h1>
             </div>
-            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <div id="container" class="container">
+            
         </div>
     </div>
                 
@@ -55,6 +55,36 @@
     nomeUser.innerHTML=sessionStorage.NOME_USUARIO;
     window.onload=validarSessao();
     window.onload=exibirMusical();
+    window.onload=listarAvaliacoes();
+    function listarAvaliacoes(){
+        fetch(`/opine/buscar/${sessionStorage.ID_MUSICAL}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    if(resposta.length>0){
+                    for(let i=0; i<resposta.length;i++){
+                        container.innerHTML+=`
+                         
+            <div class="avaliacao">
+                <div><p>${resposta[i].nome}</p></div>
+                <div style="display: flex; align-items: center;"><p>${resposta[i].nota}</p><img src="./assets/estrela.png" style="width: 20px; height: 20px; "></div>
+            </div>
+            <p>${resposta[i].comentario}</p><br>
+                        `
+                    }
+                }else{
+                    container.innerHTML=`<div>Não há avaliações realizadas</div>`
+                }
+            }
+            );
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
     function exibirMusical(){
         fetch(`/musical/buscar/${sessionStorage.ID_MUSICAL}`).then(function (response) {
             if (response.ok) {

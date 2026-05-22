@@ -64,7 +64,16 @@ function buscarRegistro(req, res){
     });
 }
 
+function buscarPorId(req, res) {
+  var id = req.params.id;
+
+  opineModel.buscarPorId(id).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 module.exports = {
+    buscarPorId,
     cadastrar,
     buscarComentario,
     buscarGenero,

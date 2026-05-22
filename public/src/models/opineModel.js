@@ -42,6 +42,14 @@ function buscarObra(){
    return database.executar(instrucaoSql);
     
 }
+function buscarPorId(id){
+    var instrucaoSql = `SELECT nome, comentario, nota FROM pesquisa 
+JOIN usuario ON fkUsuario=id
+WHERE fkMusical=${id};
+`;
+
+   return database.executar(instrucaoSql);
+}
 
 function buscarRegistro(){
     var instrucaoSql = `SELECT musical.nome, TRUNCATE(AVG(nota),1) AS media_notas FROM pesquisa
@@ -53,6 +61,7 @@ GROUP BY musical.id;
 }
 
 module.exports = {
+    buscarPorId,
     cadastrar,
     buscarComentario,
     buscarGenero,

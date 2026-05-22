@@ -57,6 +57,13 @@ footer{
 }
 
 /*fim footer */
+.avaliacao{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    padding-bottom: 30px;
+    border-bottom: solid yellow 5px;
+}
 
 
 button{
@@ -69,13 +76,10 @@ button{
     transition: 0.7s;
     border: solid gold 2px;
 }
-button:hover{
-    transform: scale(1.1);
-}
-
 
 button:hover{
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 a{
@@ -86,6 +90,7 @@ a{
 }
 a:hover{
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 header a:hover{
@@ -142,9 +147,11 @@ footer a:hover{
 
 .padding-vida{
     padding: 50px;
+    gap:50px;
 }
 
 .width-vida{
+    gap:50px;
     width: 50%;
 }
 
@@ -162,6 +169,21 @@ footer a:hover{
     gap: 20px;
 }
 
+.box2{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 100px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    gap:50px;
+}
+
 .box h2{
     text-align:justify;
 }
@@ -176,6 +198,7 @@ footer a:hover{
 
 
 .container-blue{
+    
     color:white;
     display: flex;
     flex-direction: row;
