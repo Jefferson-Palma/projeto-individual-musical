@@ -11,6 +11,8 @@ router.post("/cadastrar", function (req, res) {
 router.get("/buscarComentario", function (req, res) {
     opineController.buscarComentario(req, res);
 })
+
+
 router.get("/buscarQtdComentario", function (req, res) {
     opineController.buscarQtdComentario(req, res);
 })

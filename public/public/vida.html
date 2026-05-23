@@ -20,19 +20,24 @@
         <a href="loginn.html"><img src="./assets/user.png" class="user"></a>
     </header>
     <div class="container-blue padding-vida">
-        <div class="box2 width-vida">
+        <div class="box width-vida content">
             <h1>Relação com minha vida</h1>
-            <h2>musical é tudo que se diz respeito a música, como por exemplo instrumentos musicais, porém também se
-                trata de obras audiovisuais como filmes, séries, animações e também peças teatrais, e sua peculiaridade
-                se dá exatamente pela música, diferente de uma obra convencional onde a história é contada de forma
-                comum, em musicais os momentos chaves de maior emoção são sempre marcados por coreografias em conjunto a
-                letras expressando o sentimento da cena tornando a obra mais emocionante e também exagerada.</h2>
+            <h2>A ligação na minha vida se dá desde que eu era pequeno por volta dos 8 anos sendo meu primeiro musical que eu me lembre a saga de Descendentes, um musical que conta a história dos descendentes dos personagens da Disney, no caso da protagonista a filha da Malévola, ouvir as músicas, as danças era algo extremamente inspirador, viver um musical parecia equivalente a um sonho, então um dia surgiu a oportuninade, anos depois aos meus 15 anos eu descobri que a minha antiga escola estava fazendo um projeto de teatro musical, projeto xiquete, onde eles aceitavam pessoas sem experiencia para participar de todo o processo, tendo a etapa de audições para personagens, os ensaios toda semana, a construção do cenário e também arcar com os custos de figurino, com eles eu tive uma maior acessibilidade a esse mundo vivenciando um musical na prática, além de terem contato com grandes teatros sempre tendo ingressos de musicais em alta para assistir como o Bob Esponja, Rei Leão e muitos outros.
+<br><br><br>Desde então meu carinho por musical sempre cresceu tornando um traço de quem eu sou, com eles eu participei da produção de Bela e a Fera e a Familia Addams, mas mesmo após sair do projeto eu continuei indo a peças e assistindo as próprias peças deles.   
+</h2>
         </div>
     </div>
     <div class="container-red padding-vida">
         <div class="box width-vida">
             <h1>Galeria</h1>
-            <img class="imagem" src="./assets/addams/WhatsApp Image 2026-04-20 at 12.04.15 (1).jpeg">
+            <div id="exibir">
+                
+            </div>
+            <div style="width:500px ; display: flex; flex-direction: row; justify-content: space-between;">
+                <button  onclick="voltar()">voltar</button>
+            <button  onclick="avancar()">avancar</button>
+            </div>
+            
         </div>
     </div>
     <footer>
@@ -57,3 +62,36 @@
 </body>
 
 </html>
+<script>
+    let indicie=0;
+    let lista=[
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.15 (1).jpeg',
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.16 (2).jpeg',
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.15 (2).jpeg',
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.15 (3).jpeg',
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.15.jpeg',
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.16 (1).jpeg',
+        './assets/addams/WhatsApp Image 2026-04-20 at 12.04.16.jpeg',
+        './assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg',
+        './assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (4).jpeg',
+        './assets/eu-igor/WhatsApp Image 2026-04-20 at 12.13.26 (2).jpeg',
+        './assets/eu-igor/WhatsApp Image 2026-04-20 at 12.13.27 (2).jpeg'
+    ]
+    exibir.innerHTML=`<img class="imagem2" src="${lista[indicie]}" alt="">`
+    function avancar(){
+        if(indicie!=lista.length-1){
+            indicie++
+        }else{
+            indicie=0;
+        }
+    exibir.innerHTML=`<img class="imagem2" src="${lista[indicie]}" alt="">`
+    }
+    function voltar(){
+        if(indicie!=0){
+        indicie--
+    }else{
+        indicie=lista.length-1;
+    }
+    exibir.innerHTML=`<img class="imagem2" src="${lista[indicie]}" alt="">`
+    }
+</script>
