@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Opine | Visual Music</title>
     <link rel="stylesheet" href="./css/style.css">
     
     <script src="./js/sessao.js"></script>
@@ -65,9 +65,9 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.forEach(item => {
-                        musicais.innerHTML+=`<option value="${item.id}">${item.nome}</option>`
-                    });
+                    for(let i=0;i<resposta.length;i++){
+                        musicais.innerHTML+=`<option value="${resposta[i].id}">${resposta[i].nome}</option>`
+                    };
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

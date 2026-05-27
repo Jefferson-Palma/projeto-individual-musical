@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ver Musical | Visual Music</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/sessao.js"></script>
 </head>
@@ -66,10 +66,22 @@
                         container.innerHTML+=`
                          
             <div class="avaliacao">
+                <div class="bloco">
+                    <div style="display:flex; justify-content:space-between;width:100%; border-bottom: solid yellow 5px;">
                 <div><p>${resposta[i].nome}</p></div>
-                <div style="display: flex; align-items: center;"><p>${resposta[i].nota}</p><img src="./assets/estrela.png" style="width: 20px; height: 20px; "></div>
+                <div style="display: flex; align-items: center;"><p>${resposta[i].nota}</p><img src="./assets/estrela.png" style="width: 20px; height: 20px; "></div>    
+            
+                </div><br>
+            
+            <p>${resposta[i].comentario}</p>
+            <br>
+            <span>${resposta[i].dtComentario}</span>
+                </div>
             </div>
-            <p>${resposta[i].comentario}</p><br>
+            
+            
+            
+            
                         `
                     }
                 }else{

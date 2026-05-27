@@ -58,11 +58,21 @@ footer{
 
 /*fim footer */
 .avaliacao{
+    background-color: white;
+    border-radius: 15px;
+    color:black;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     width: 70%;
     padding-bottom: 30px;
-    border-bottom: solid yellow 5px;
+    
+}
+.bloco{
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 

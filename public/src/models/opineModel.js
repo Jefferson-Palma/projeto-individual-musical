@@ -43,7 +43,7 @@ function buscarObra(){
     
 }
 function buscarPorId(id){
-    var instrucaoSql = `SELECT nome, comentario, nota FROM pesquisa 
+    var instrucaoSql = ` SELECT nome, comentario, DATE_FORMAT(dtComentario,'%d-%m-%Y %h:%m') AS dtComentario, nota FROM pesquisa 
 JOIN usuario ON fkUsuario=id
 WHERE fkMusical=${id};
 `;
