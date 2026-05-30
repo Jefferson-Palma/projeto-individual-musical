@@ -20,7 +20,8 @@ function buscarGenero(){
     return database.executar(instrucaoSql);
 }
 function buscarComentario(){
-    var instrucaoSql=` SELECT musical.nome, TRUNCATE(COUNT(idPesquisa),0) AS qtdAvaliacao FROM pesquisa 
+    var instrucaoSql=
+    ` SELECT musical.nome, COUNT(idPesquisa) AS qtdAvaliacao FROM pesquisa 
     JOIN musical ON id=fkMusical
     GROUP BY fkMusical ORDER BY qtdAvaliacao DESC LIMIT 1;`;
     return database.executar(instrucaoSql);

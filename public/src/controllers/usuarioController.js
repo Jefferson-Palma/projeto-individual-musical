@@ -19,29 +19,14 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        //res.status(200).send("Sucesso");
+                        
                         res.json({
                             id: resultadoAutenticar[0].id,
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
                             senha: resultadoAutenticar[0].senha
-                            //musicais:resultadoMusicais
+                          
                         })
-//alert('sucesso');
-                        // musicalModel.listar()
-                        //     .then((resultadoMusicais) => {
-                        //         if (resultadoMusicais.length > 0) {
-                        //             res.json({
-                        //                 id: resultadoAutenticar[0].id,
-                        //                 email: resultadoAutenticar[0].email,
-                        //                 nome: resultadoAutenticar[0].nome,
-                        //                 senha: resultadoAutenticar[0].senha,
-                        //                 musicais: resultadoMusicais
-                        //             });
-                        //         } else {
-                        //             res.status(204).json({ musicais: [] });
-                        //         }
-                        //     })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
