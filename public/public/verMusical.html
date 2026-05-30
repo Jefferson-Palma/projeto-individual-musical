@@ -31,12 +31,10 @@
         <h1 id="id_titulo">Titulo</h1>
         </div>
         <div class="container" id="img_desc">
-            <!-- <img src="./assets/bela-fera/WhatsApp Image 2026-04-20 at 12.04.16 (3).jpeg">
-            <p>Descrição</p> -->
+
         </div>    
         <div class="container">
             <h1>Trailer</h1>
-            <!-- <iframe src="https://www.youtube.com/embed/MZsYDpafGTY?si=0rXfpF-wJsdKSdjk" allowfullscreen></iframe> -->
             <div id="trailer"></div>
         </div>
         <div class="titulos">
@@ -105,9 +103,11 @@
                     id_titulo.innerHTML=resposta[0].nome;
 
                     img_desc.innerHTML=`<img src="${resposta[0].imagem}"></img>
-                    <p>Lançamento: ${resposta[0].dtLancamento}</p>
-                    <p>Sinopse:</p>
-                    <p>${resposta[0].descricao}</p>`
+                    <div class="sinopse">
+                        <p>Sinopse: ${resposta[0].descricao}</p>
+                        <p>Lançamento: ${resposta[0].dtLancamento}</p>
+                    
+                    </div>`
 
 
                     trailer.innerHTML=`<iframe src="${resposta[0].trailer}" allowfullscreen></iframe>`

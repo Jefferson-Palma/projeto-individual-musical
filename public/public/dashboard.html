@@ -86,7 +86,6 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    //resposta.reverse();
                     console.log(JSON.stringify(resposta));
 
                     plotarGrafico1(resposta);
@@ -175,7 +174,7 @@
             config
         );
         myChart.update();
-        setInterval(() => atualizarGrafico1(dados, myChart), 10000);
+        setTimeout(() => atualizarGrafico1(dados, myChart), 10000);
     }
 
     function plotarGrafico2(resposta) {
@@ -228,7 +227,7 @@
             document.getElementById(`myChart2`),
             config
         )
-        setInterval(() => atualizarGrafico2(dados, myChart2), 10000);
+        setTimeout(() => atualizarGrafico2(dados, myChart2), 10000);
     }
 
 
@@ -251,7 +250,7 @@
                     dados.labels = labelNovos;
                     console.log(dados);
                     myChart.update();
-                    setInterval(() => atualizarGrafico2(dados, myChart), 10000);
+                    setTimeout(() => atualizarGrafico2(dados, myChart), 10000);
 
                 });
             } else {
@@ -284,7 +283,7 @@
                     dados.labels = labelNovos;
                     console.log(dados);
                     myChart.update();
-                    setInterval(() => atualizarGrafico1(dados, myChart), 2000);
+                    setTimeout(() => atualizarGrafico1(dados, myChart), 2000);
 
                 });
             } else {

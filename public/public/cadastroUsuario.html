@@ -40,6 +40,7 @@
             <div id="id_erro_senha" class="erro"></div>
             </div>
             <button onclick="cadastroUsuario()">Cadastrar</button>
+            <p>Já possui uma conta? <a  href="loginn.html"><span style="color:gold">Entre</span></a></p>
         </div>
     </div>
     <footer>
@@ -74,13 +75,11 @@
         let invalido=0;
         // validação nome
         if(!nome==''){
-            // for(let i=0; i<numeros.length;i++){
             for(let i=0;i<nome.length;i++){
                 if(nome[i].toLowerCase()==nome[i].toUpperCase()){
                     nomeInvalido++;
                 }
             }
-            // }
         }else{
             nomeInvalido++
         }
@@ -96,14 +95,12 @@
         }
 
         //validação senhas
-        if(senha=='' || senhaConfirmacao==''||senha!=senhaConfirmacao){
+        if(senha=='' || senhaConfirmacao==''||senha!=senhaConfirmacao ||senha.length<8){
             id_erro_senha.innerHTML=`Senha inválida`
             invalido++
         }
 
-        if(invalido==0){
-            alert('Cadastro realizado com sucesso!!');
-        }else{
+        if(invalido!=0){   
             return;
         }
 
@@ -113,21 +110,15 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nome,
         emailServer: email,
         senhaServer: senha
-    //    cpfServer: cpfVar,//campo cpf
-    //    idEmpresaVincularServer: idEmpresaVincular
       }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          //cardErro.style.display = "block";
-
           alert(
             "Cadastro realizado com sucesso! Redirecionando para tela de Login..."
 )
@@ -140,7 +131,6 @@
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        //finalizarAguardar();
       });
 
     return false;

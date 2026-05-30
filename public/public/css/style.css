@@ -31,7 +31,7 @@ header{
 /* footer */
 footer{
     background-color: #121037;
-    border-top:solid 5px gold;
+    border-top:solid 2px gold;
     height: 200px;
     display: flex;
     color:white;
@@ -56,17 +56,32 @@ footer{
     flex-direction: column;
 }
 
+.sinopse{
+    display: flex;
+    background-color: #121037;
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    flex-direction: column;
+    width: 70%;
+    gap: 20px;
+}
+
 /*fim footer */
 .avaliacao{
-    background-color: white;
+    background-color: #121037;
     border-radius: 15px;
-    color:black;
+    color:white;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     width: 70%;
     padding-bottom: 30px;
     
+}
+
+.avaliacao p{
+    width: 1200px;
 }
 .bloco{
     
@@ -79,6 +94,7 @@ footer{
 button{
     border-radius: 30px;
     color:white;
+    font-weight: bold;
     font-size: 30px;
     height: 80px;
     width: 350px;
@@ -148,7 +164,10 @@ footer a:hover{
     border-bottom: solid 3px gold;
 }
 .padding-home{
-    padding: 150px;
+    padding-bottom: 150px;
+    padding-top: 150px;
+    padding-left: 75px;
+    padding-right: 75px;
 }
 
 .width-home{
@@ -532,7 +551,7 @@ footer a:hover{
 
 .container p{
     font-size: 30px;
-    width: 70%;
+    width: 100%;
 }
 .ttulos h1{
     font-size: 100px;
